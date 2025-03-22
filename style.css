@@ -1,0 +1,486 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    position: sticky;
+    top: 40px;
+    z-index: 99;
+    width: 100%;
+    text-align: center;
+}
+
+body {
+    height: 100vh;
+    width: 80%;
+    padding: 4rem;
+    margin: auto;
+    background-image: url("https://cdn.pixabay.com/photo/2014/06/16/23/39/black-370118_960_720.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7rem 0;
+    gap: 8rem;
+    text-align: left;
+}
+
+.hero-head {
+    font-size: 3rem;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+}
+
+.content p {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Login form styles */
+.call-to-action {
+    width: 100%;
+    max-width: 28rem;
+}
+
+.card {
+    background-color: #111827;
+    /* gray-900 */
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    padding: 2rem;
+    /* p-8 */
+    box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.1), 0 4px 6px -4px rgba(139, 92, 246, 0.1);
+    /* shadow with purple tint */
+}
+
+.call-to-action h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    /* text-2xl */
+    font-weight: 700;
+    /* font-bold */
+    margin-bottom: 1.5rem;
+    /* mb-6 */
+    color: white;
+}
+
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    /* space-y-5 */
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #9ca3af;
+    /* gray-400 */
+}
+
+.card input[type="text"],
+.card input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    /* pl-10 and standard padding */
+    background-color: #1f2937;
+    /* gray-800 */
+    border: 1px solid #374151;
+    /* border-gray-700 */
+    border-radius: 0.375rem;
+    /* rounded-md */
+    color: white;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.card input[type="text"]::placeholder,
+.card input[type="password"]::placeholder {
+    color: #6b7280;
+    /* gray-500 */
+}
+
+.card input[type="text"]:focus,
+.card input[type="password"]:focus {
+    border-color: #8b5cf6;
+    /* purple-600 */
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+.row-3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* space-x-2 */
+}
+
+.card input[type="checkbox"] {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #4b5563;
+    /* border-gray-600 */
+    border-radius: 0.25rem;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.card input[type="checkbox"]:checked {
+    background-color: #8b5cf6;
+    /* purple-600 */
+    border-color: #8b5cf6;
+    /* purple-600 */
+}
+
+.card input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.card label {
+    font-size: 0.875rem;
+    /* text-sm */
+    color: #d1d5db;
+    /* gray-300 */
+    cursor: pointer;
+}
+
+.forgot-password {
+    font-size: 0.875rem;
+    /* text-sm */
+    color: #a78bfa;
+    /* purple-400 */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot-password:hover {
+    color: #c4b5fd;
+    /* purple-300 */
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #8b5cf6;
+    /* purple-600 */
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    /* rounded-md */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #7c3aed;
+    /* purple-700 */
+}
+
+.create-account {
+    margin-top: 1.5rem;
+    /* mt-6 */
+    text-align: center;
+    font-size: 0.875rem;
+    /* text-sm */
+    color: #9ca3af;
+    /* gray-400 */
+}
+
+.create-account a {
+    color: #a78bfa;
+    /* purple-400 */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.create-account a:hover {
+    color: #c4b5fd;
+    /* purple-300 */
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .card {
+        padding: 1.5rem;
+    }
+
+    .row-3 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 3rem 0;
+}
+
+.divider {
+    margin: 0.5rem 0;
+    height: 1px;
+    width: 100%;
+    background-color: #D1D5DB;
+    /* light gray for the divider */
+}
+
+.outer-wrapper {
+    display: flex;
+    height: 60%;
+    gap: 8rem;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    /* Padding for the container */
+}
+
+.pendant-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pendant-item {
+    width: 120px;
+    height: 120px;
+    background-color: #111827;
+    border-radius: 50%;
+    padding: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.1), 0 4px 6px -4px rgba(139, 92, 246, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* To position the pseudo-element */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth hover effects */
+}
+
+.pendant-item::before {
+    content: ""; /* Required to make the pseudo-element appear */
+    background-color: #D1D5DB; /* Gray string */
+    width: 1px;
+    height: 100px; /* Length of the string */
+    position: absolute;
+    left: 50%;
+    top: -100px; /* Position the string above the pendant */
+    z-index: -1; /* Keep it behind the content */
+}
+
+.pendant-item--highlighted {
+    background-color: #8B5CF6;
+    transform: scale(1.1); /* Slight scale-up effect for highlighted cards */
+    box-shadow: 0 12px 18px -3px rgba(139, 92, 246, 0.15), 0 6px 8px -4px rgba(139, 92, 246, 0.15);
+    /* Stronger shadow for highlighted */
+}
+
+.pendant-item:hover {
+    transform: scale(1.05); /* Hover effect for all pendants */
+    box-shadow: 0 12px 18px -3px rgba(139, 92, 246, 0.2), 0 6px 8px -4px rgba(139, 92, 246, 0.2);
+    /* Hover shadow effect */
+}
+
+.component-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    /* Space between title and divider */
+}
+
+.component-description {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: #E5E7EB;
+    margin-top: 1.5rem;
+    text-align: center;
+    /* Space between description and divider */
+}
+
+.heading-section {
+    text-align: center;
+}
+
+.heading-section h3 {
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.heading-section p {
+    font-size: 1.225rem;
+    font-weight: 400;
+    color: #6B7280;
+    /* medium gray */
+}
+
+.steps-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    /* grid-gap: 20px; */
+    padding: 20px;
+    align-items: stretch;
+}
+
+.step1, .step2, .step3, .step4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #111827;
+    /* border-radius: 12px; */
+    padding: 40px;
+    box-sizing: border-box;
+    color: #fff;
+    overflow: hidden; /* prevent content from spilling outside */
+}
+
+.step2, .step3 {
+    background-color: #8B5CF6;
+}
+
+.step2, .step4 {
+    padding-left: 60px;
+    transform: translateX(-50px);
+}
+
+.steps-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.divider {
+    height: 1px;
+    background-color: #fff;
+    margin: 10px 0;
+}
+
+.steps-description {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #e0e0e0;
+    line-height: 1.5;
+}
+
+.step1 {
+    /* Adjusted clip-path for better content visibility */
+    clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
+    border-top-left-radius: 12px;
+}
+
+.step2 {
+    /* Adjusted clip-path for better content visibility */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 15% 100%);
+    border-top-right-radius: 12px;
+}
+
+.step3 {
+    /* Adjusted clip-path for better content visibility */
+    clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%);
+    border-bottom-left-radius: 12px;
+}
+
+.step4 {
+    /* Adjusted clip-path for better content visibility */
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+    border-bottom-right-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .steps-wrapper {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+}
+
+.card-wrapper {
+    display: flex;
+    gap: 1rem;
+    line-height: 1.6rem;
+}
+
+.review {
+    width: 17rem;
+    height: 22rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.review p {
+    font-style: italic;
+    font-weight: 200;
+    font-size: 1rem;
+}
+
+.review h4 {
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 400;
+    position: relative; 
+    padding-left: 10px; /* Adjust space between text and line */
+}
+
+.review h4::before {
+    content: ""; /* Required to make the pseudo-element appear */
+    background-color: #D1D5DB; /* Gray string */
+    width: 70px; /* Length of the string */
+    height: 1px;
+    position: absolute;
+    top: 50%; /* Center the string vertically */
+    transform: translate(-110%, -50%); /* Adjust for perfect vertical centering */
+    /* z-index: -1; Ensure the line is behind the text */
+}
+
+.questions h4 {
+    background-color: #111827;
+    border-radius: 0.75rem;
+    padding: 2rem;
+}
