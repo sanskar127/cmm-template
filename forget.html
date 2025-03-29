@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Forget Password</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="index.html">Signin</a></li>
+                    <li><a href="signup.html">Signup</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">API</a></li>
+                </ul>
+            </nav>
+            <h2>SPACEXPANEL DEMO</h2>
+        </div>
+    </header>
+
+    <!-- Forget Password section -->
+    <div class="container">
+        <section class="call-to-action">
+            <div class="card">
+                <h2>Forget Password?</h2>
+                <form id="login-form" action="#" method="post">
+                    <div class="input-group">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="email" name="email" id="email" placeholder="Your email" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Reset password</button>
+                </form>
+    
+                <div class="create-account">
+                    Back to <a href="index.html">login</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Initialize Lucide icons
+            const lucide = window.lucide; // Assuming lucide is available globally
+            lucide.createIcons();
+
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+
+                question.addEventListener('click', () => {
+                    // Toggle current item
+                    item.classList.toggle('active');
+
+                    // Optional: Close other items when one is opened
+                    // Uncomment the following code if you want only one FAQ item open at a time
+                    /*
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    */
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

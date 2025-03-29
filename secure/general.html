@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../stylesheet.css">
+    <title>Services</title>
+</head>
+
+<body>
+    <!-- Top Navbar -->
+    <header>
+        <div class="header-container">
+            <h2>SPACEXPANEL DEMO</h2>
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="#">$0</a></li>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="box">
+
+        <!-- Order Status Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="all">General</button>
+            <button class="tab" data-tab="pending">Notifications</button>
+        </div>
+
+        <section class="form">
+            <div class="card">
+                
+                <div class="input-group">
+                    <label for="category" class="form-label">Username</label>
+                    <input type="text" name="uname" id="uname" placeholder="username" disabled>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Xyz" disabled>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">WhatsApp</label>
+                    <input type="text" name="whatsapp" id="whatsapp" placeholder="1234567890" disabled>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Balance</label>
+                    <input type="text" name="balance" id="balance" placeholder="$0.00" disabled>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Balance</label>
+                    <input type="text" name="balance" id="balance" placeholder="$0.00" disabled>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Spend</label>
+                    <input type="text" name="spend" id="spend" placeholder="$0.00" disabled>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Current Password</label>
+                    <input type="password" name="currpasswd" id="currpasswd">
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">New Password</label>
+                    <input type="password" name="newpasswd" id="newpasswd">
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Password (Retry)</label>
+                    <input type="password" name="passwd" id="passwd">
+                </div>
+                
+                <button type="submit" class="primary btn-block">Update Password</button>
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Timezone</label>
+                    <select id="category" class="form-control">
+                        <option>No Timezone Found!</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="primary btn-block">Change Timezone</button>
+
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Api Url</label>
+                    <input type="text" name="api" id="api" placeholder="https://demo.spacexpanel.com/api/v2" disabled>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="category" class="form-label">Api Key</label>
+                    <input type="password" name="key" id="key" placeholder="1234567890" disabled>
+                </div>
+                
+                <button type="submit" class="primary btn-block">Generate</button>
+
+                </form>
+            </div>
+        </section>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Tab functionality
+            const tabs = document.querySelectorAll(".tab")
+            const tabContents = document.querySelectorAll(".tab-content")
+
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", function () {
+                    const tabId = this.getAttribute("data-tab")
+
+                    // Remove active class from all tabs and tab contents
+                    tabs.forEach((t) => t.classList.remove("active"))
+                    tabContents.forEach((content) => content.classList.remove("active"))
+
+                    // Add active class to current tab and tab content
+                    this.classList.add("active")
+                    const activeContent = document.getElementById(tabId)
+                    if (activeContent) {
+                        activeContent.classList.add("active")
+                    }
+                })
+            })
+
+            // Filter dropdown functionality
+            const filterBtn = document.getElementById('filterBtn');
+            const filterMenu = document.getElementById('filterMenu');
+
+            filterBtn.addEventListener('click', function () {
+                filterMenu.classList.toggle('show');
+            });
+
+            // Close the dropdown when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!filterBtn.contains(event.target) && !filterMenu.contains(event.target)) {
+                    filterMenu.classList.remove('show');
+                }
+            });
+
+            // Filter menu item click
+            const filterMenuItems = document.querySelectorAll('.filter-menu-item');
+            filterMenuItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    filterBtn.querySelector('span').textContent = this.textContent;
+                    filterMenu.classList.remove('show');
+                    // Here you would typically filter the table data
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

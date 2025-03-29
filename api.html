@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>API</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="index.html">Signin</a></li>
+                    <li><a href="signup.html">Signup</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li class="nav-active"><a href="api.html">API</a></li>
+                </ul>
+            </nav>
+            <h2>SPACEXPANEL DEMO</h2>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <div class="heading-section">
+                <h3>API Documentation</h3>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <tbody>
+                        <tr>
+                            <td>Method</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>API Url</td>
+                            <td>https://demo.spacexpanel.com/api/v2</td>
+                        </tr>
+                        <tr>
+                            <td>Return Format</td>
+                            <td>JSON</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Service List Section -->
+        <section>
+            <div class="heading-section">
+                <h4>Service List</h4>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>Your API key</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>services</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="heading-section">
+                <h5>Example Response</h5>
+            </div>
+
+            <pre id="service" class="card codeblock"></pre>
+        </section>
+
+        <!-- Add Order Section -->
+        <section>
+            <div class="heading-section">
+                <h4>Add Order</h4>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>Your API key</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>add</td>
+                        </tr>
+                        <tr>
+                            <td>service</td>
+                            <td>Service ID</td>
+                        </tr>
+                        <tr>
+                            <td>link</td>
+                            <td>Link</td>
+                        </tr>
+                        <tr>
+                            <td>quantity</td>
+                            <td>Quantity</td>
+                        </tr>
+                        <tr>
+                            <td>runs (optional)</td>
+                            <td>Runs to deliver</td>
+                        </tr>
+                        <tr>
+                            <td>interval (optional)</td>
+                            <td>Interval in minutes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="heading-section">
+                <h5>Example Response</h5>
+            </div>
+
+            <pre id="order" class="card codeblock"></pre>
+        </section>
+
+        <!-- Order Status Section -->
+        <section>
+            <div class="heading-section">
+                <h4>Order Status</h4>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>Your API key</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>status</td>
+                        </tr>
+                        <tr>
+                            <td>order</td>
+                            <td>Order ID</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="heading-section">
+                <h5>Example Response</h5>
+            </div>
+
+            <pre id="orderstatus" class="card codeblock"></pre>
+        </section>
+
+        <!-- Multiple Orders Status Section -->
+        <section>
+            <div class="heading-section">
+                <h4>Multiple Orders Status</h4>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>Your API key</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>status</td>
+                        </tr>
+                        <tr>
+                            <td>orders</td>
+                            <td>Order IDs separated by comma</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="heading-section">
+                <h5>Example Response</h5>
+            </div>
+
+            <pre id="multipleorderstatus" class="card codeblock"></pre>
+        </section>
+
+        <!-- Create Refill Section -->
+        <section>
+            <div class="heading-section">
+                <h4>Create Refill</h4>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>Your API key</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>refill</td>
+                        </tr>
+                        <tr>
+                            <td>order</td>
+                            <td>Order ID</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="heading-section">
+                <h5>Example Response</h5>
+            </div>
+
+            <pre id="refill" class="card codeblock"></pre>
+        </section>
+
+        <!-- Get Refill Status Section -->
+        <section>
+            <div class="heading-section">
+                <h4>Get Refill Status</h4>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>Your API key</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>refill_status</td>
+                        </tr>
+                        <tr>
+                            <td>refill</td>
+                            <td>Refill ID</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="heading-section">
+                <h5>Example Response</h5>
+            </div>
+
+            <pre id="refillstatus" class="card codeblock"></pre>
+        </section>
+
+        <!-- User Balance Section -->
+        <section>
+            <div class="heading-section">
+                <h4>User Balance</h4>
+            </div>
+
+            <div class="table-container ">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>Your API key</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>balance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="heading-section">
+                <h5>Example Response</h5>
+            </div>
+
+            <pre id="userbalance" class="card codeblock"></pre>
+        </section>
+
+        <button style="margin: 2rem 0;" class="primary btn-block">Sample PHP file</button>
+    </div>
+
+    <script>
+        const service = [
+            {
+                "service": 1,
+                "name": "Followers",
+                "type": "Default",
+                "category": "First Category",
+                "rate": "0.90",
+                "min": "50",
+                "max": "10000",
+                "desc": "Some Description",
+                "refill": true
+            },
+            {
+                "service": 2,
+                "name": "Comments",
+                "type": "Custom Comments",
+                "category": "Second Category",
+                "rate": "8",
+                "min": "10",
+                "desc": "Some Description",
+                "max": "1500",
+                "refill": false
+            }
+        ]
+        const order = { "order": 23501 }
+        const orderStatus = {
+            "charge": "0.27819",
+            "start_count": "3572",
+            "status": "Partial",
+            "remains": "157",
+            "currency": "USD"
+        }
+        const multipleOrderStatus = {
+            "1": {
+                "charge": "0.27819",
+                "start_count": "3572",
+                "status": "Partial",
+                "remains": "157",
+                "currency": "USD"
+            },
+            "10": {
+                "error": "Incorrect order ID"
+            },
+            "100": {
+                "charge": "1.44219",
+                "start_count": "234",
+                "status": "In progress",
+                "remains": "10",
+                "currency": "USD"
+            }
+        }
+        const refill = {
+            "refill": "1"
+        }
+        const refillStatus = {
+            "status": "Completed"
+        }
+        const userBalance = {
+            "balance": "100.84292",
+            "currency": "USD"
+        }
+
+        document.getElementById('service').innerHTML = JSON.stringify(service, null, 2)
+        document.getElementById('order').innerHTML = JSON.stringify(order, null, 2)
+        document.getElementById('orderstatus').innerHTML = JSON.stringify(orderStatus, null, 2)
+        document.getElementById('multipleorderstatus').innerHTML = JSON.stringify(multipleOrderStatus, null, 2)
+        document.getElementById('refill').innerHTML = JSON.stringify(refill, null, 2)
+        document.getElementById('refillstatus').innerHTML = JSON.stringify(refillStatus, null, 2)
+        document.getElementById('userbalance').innerHTML = JSON.stringify(userBalance, null, 2)
+    </script>
+</body>
+
+</html>
