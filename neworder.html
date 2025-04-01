@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Services</title>
+</head>
+
+<body>
+    <!-- Top Navbar -->
+    <header id="header"></header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="row1">
+
+            <div class="card stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3>sidharthkumar</h3>
+                <p>Welcome to SPACEXPANEL DEMO!</p>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>$0.00</h3>
+                <p>Spent balance</p>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-square"></i>
+                </div>
+                <h3>0</h3>
+                <p>Completed orders</p>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>$0.00</h3>
+                <p>Account Balance</p>
+            </div>
+        </section>
+
+        <div class="gap"></div>
+
+        <!-- Call to Action -->
+        <section class="form">
+            <div class="card form-type2">
+                <h2>New Order</h2>
+                <form action="#">
+                    <div class="input-group">
+                        <label for="category" class="form-label">Category</label>
+                        <select id="category" class="form-control mt-10">
+                            <option>Select category</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="category" class="form-label">Services</label>
+                        <select id="category" class="form-control mt-10">
+                            <option>No Services Found!</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="category" class="form-label">Charge</label>
+                        <input type="text" name="charge" class="mt-10" value="-" disabled>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Place Order</button>
+                </form>
+            </div>
+        </section>
+
+        <nav id="footer"></nav>
+    </main>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#header").load("header-secured.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</body>
+
+</html>

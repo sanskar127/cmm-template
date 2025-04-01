@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Services</title>
+</head>
+
+<body>
+    <header id="header"></header>
+
+    <!-- Main Content -->
+    <section class="container">
+
+        <section class="form">
+            <div class="card form-type2">
+                <h2>Add Funds</h2>
+                <form action="#">
+                    <div class="input-group">
+                        <label for="category">Method</label>
+                        <select id="category" class="form-control mt-10" disabled>
+                            <option>No Payment methods found!</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div class="gap"></div>
+
+        <section class="form">
+            <div class="card form-type2">
+                <form action="#">
+                    <div class="input-group">
+                        <label for="category">Enter coupon code here</label>
+                        <input class="mt-10" type="text" name="couponcode">
+                    </div>
+
+                    <button type="submit" class="primary btn-block">Redeem Coupon</button>
+                </form>
+            </div>
+        </section>
+
+        <div class="gap"></div>
+
+        <!-- Services Table -->
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Amount</th>
+                        <th>Payment Method</th>
+                        <th>Date</th>
+                        <th>Transaction Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">No Data Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <nav id="footer"></nav>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#header").load("header-secured.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</body>
+
+</html>

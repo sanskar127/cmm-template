@@ -4,24 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="stylesheet.css">
     <title>API</title>
 </head>
 
 <body>
-    <header>
-        <div class="header-container">
-            <nav class="top-nav">
-                <ul>
-                    <li><a href="index.html">Signin</a></li>
-                    <li><a href="signup.html">Signup</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li class="nav-active"><a href="api.html">API</a></li>
-                </ul>
-            </nav>
-            <h2>SPACEXPANEL DEMO</h2>
-        </div>
-    </header>
+    <header id="header"></header>
 
     <div class="container">
         <section>
@@ -389,14 +378,21 @@
             "currency": "USD"
         }
 
-        document.getElementById('service').innerHTML = JSON.stringify(service, null, 2)
-        document.getElementById('order').innerHTML = JSON.stringify(order, null, 2)
-        document.getElementById('orderstatus').innerHTML = JSON.stringify(orderStatus, null, 2)
-        document.getElementById('multipleorderstatus').innerHTML = JSON.stringify(multipleOrderStatus, null, 2)
-        document.getElementById('refill').innerHTML = JSON.stringify(refill, null, 2)
-        document.getElementById('refillstatus').innerHTML = JSON.stringify(refillStatus, null, 2)
-        document.getElementById('userbalance').innerHTML = JSON.stringify(userBalance, null, 2)
+        document.getElementById('service').innerHTML = JSON.stringify(service, null, 0.2)
+        document.getElementById('order').innerHTML = JSON.stringify(order, null, 0.2)
+        document.getElementById('orderstatus').innerHTML = JSON.stringify(orderStatus, null, 0.2)
+        document.getElementById('multipleorderstatus').innerHTML = JSON.stringify(multipleOrderStatus, null, 0.2)
+        document.getElementById('refill').innerHTML = JSON.stringify(refill, null, 0.2)
+        document.getElementById('refillstatus').innerHTML = JSON.stringify(refillStatus, null, 0.2)
+        document.getElementById('userbalance').innerHTML = JSON.stringify(userBalance, null, 0.2)
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</body>
 </body>
 
 </html>

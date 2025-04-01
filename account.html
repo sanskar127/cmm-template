@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Services</title>
+</head>
+
+<body>
+    <!-- Top Navbar -->
+    <header id="header"></header>
+
+    <!-- Main Content -->
+    <section class="box" id="main">
+        <!-- Order Status Tabs -->
+        <div class="tabs">
+            <button class="tab active" id="general" data-tab="general">General</button>
+            <button class="tab" id="notifications" data-tab="notifications">Notifications</button>
+        </div>
+
+        <!-- Tab Content -->
+        <section class="form">
+            <div id="general-content" class="tab-content active">
+                <!-- General Tab Content (existing content) -->
+                <section class="form">
+                    <div class="card form-type2">
+                        <form>
+                            <div class="input-group">
+                                <label for="category" class="form-label">Username</label>
+                                <input class="mt-10" type="text" name="uname" id="uname" placeholder="username" disabled>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Name</label>
+                                <input class="mt-10" type="text" name="name" id="name" placeholder="Xyz" disabled>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">WhatsApp</label>
+                                <input class="mt-10" type="text" name="whatsapp" id="whatsapp" placeholder="1234567890" disabled>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Balance</label>
+                                <input class="mt-10" type="text" name="balance" id="balance1" placeholder="$0.00" disabled>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Spend</label>
+                                <input class="mt-10" type="text" name="spend" id="spend" placeholder="$0.00" disabled>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Current Password</label>
+                                <input class="mt-10" type="password" name="currpasswd" id="currpasswd">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">New Password</label>
+                                <input class="mt-10" type="password" name="newpasswd" id="newpasswd">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Password (Retry)</label>
+                                <input class="mt-10" type="password" name="passwd" id="passwd">
+                            </div>
+
+                            <button type="submit" class="primary btn-block">Update Password</button>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Timezone</label>
+                                <select id="category" class="form-control mt-10">
+                                    <option>No Timezone Found!</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="primary btn-block">Change Timezone</button>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Api Url</label>
+                                <input class="mt-10" type="text" name="api" id="api" placeholder="https://demo.spacexpanel.com/api/v2"
+                                    disabled>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="category" class="form-label">Api Key</label>
+                                <input class="mt-10" type="password" name="key" id="key" value="1234567890" disabled>
+                            </div>
+
+                            <button type="submit" class="primary btn-block">Generate</button>
+
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <div id="notifications-content" class="tab-content">
+                <!-- Notifications Tab Content (can add different content here) -->
+                <section class="form">
+                    <div class="card form-type2">
+                        <form action="#">
+                        <div class="input-group">
+                            <label for="category" class="form-label">Telegram Username</label>
+                            <input class="mt-10" type="text" name="telegramuname">
+                        </div>
+
+                        <button type="submit" class="primary btn-block">Update</button>
+                        </form>
+                    </div>
+                </section>
+
+                <div class="gap"></div>
+
+                <!-- Services Table -->
+                <section class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Notification</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>API key changed</td>
+                                <td><input type="checkbox" name="apichange" id="apichange"></td>
+                            </tr>
+                            <tr>
+                                <td>New message</td>
+                                <td><input type="checkbox" name="apichange" id="apichange"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><button class="primary btn-block">Save Changes</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </section>
+
+        <nav id="footer"></nav>
+    </section>
+
+    <!-- Add the Lucide icon library if you want to use it -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@0.1.0/dist/lucide.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Lucide icons (Make sure the library is included)
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            const generalTab = document.getElementById('general');
+            const notificationsTab = document.getElementById('notifications');
+
+            const generalContent = document.getElementById('general-content');
+            const notificationsContent = document.getElementById('notifications-content');
+
+            // Tab functionality
+            const tabs = document.querySelectorAll(".tab");
+            const tabContents = document.querySelectorAll(".tab-content");
+
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", function () {
+                    const tabId = this.getAttribute("data-tab");
+
+                    // Remove active class from all tabs and tab contents
+                    tabs.forEach((t) => t.classList.remove("active"));
+                    tabContents.forEach((content) => content.classList.remove("active"));
+
+                    // Add active class to current tab and content
+                    this.classList.add("active");
+                    if (tabId === "general") {
+                        generalContent.classList.add("active");
+                        notificationsContent.classList.remove("active");
+                    } else if (tabId === "notifications") {
+                        notificationsContent.classList.add("active");
+                        generalContent.classList.remove("active");
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#header").load("header-secured.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</body>
+
+</html>

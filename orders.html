@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Services</title>
+</head>
+
+<body>
+    <!-- Top Navbar -->
+    <header id="header"></header>
+
+    <!-- Main Content -->
+    <section class="box">
+
+        <!-- Order Status Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="all">All</button>
+            <button class="tab" data-tab="pending">Pending</button>
+            <button class="tab" data-tab="in-progress">In Progress</button>
+            <button class="tab" data-tab="completed">Completed</button>
+            <button class="tab" data-tab="partial">Partial</button>
+            <button class="tab" data-tab="processing">Processing</button>
+            <button class="tab" data-tab="canceled">Canceled</button>
+        </div>
+
+        <!-- Search -->
+        <div class="search-filter-container">
+            <div class="searchbar" style="flex: 1; margin-bottom: 0;">
+                <i class="fas fa-search"></i>
+                <input type="search" placeholder="Type to search">
+            </div>
+        </div>
+
+        <!-- Tab Content Sections -->
+        <div class="tab-content-container">
+            <!-- All Tab Content -->
+            <section id="all" class="table-container tab-content active">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>Link</th>
+                            <th>Charge</th>
+                            <th>Start</th>
+                            <th>Quantity</th>
+                            <th>Service Name</th>
+                            <th>Status</th>
+                            <th>Remain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="9">No Data Found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Pending Tab Content -->
+            <section id="pending" class="table-container tab-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>Link</th>
+                            <th>Charge</th>
+                            <th>Start</th>
+                            <th>Quantity</th>
+                            <th>Service Name</th>
+                            <th>Status</th>
+                            <th>Remain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="9">No Data Found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- In-progress Tab Content -->
+            <section id="in-progress" class="table-container tab-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>Link</th>
+                            <th>Charge</th>
+                            <th>Start</th>
+                            <th>Quantity</th>
+                            <th>Service Name</th>
+                            <th>Status</th>
+                            <th>Remain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="9">No Data Found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Completed Tab Content -->
+            <section id="completed" class="table-container tab-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>Link</th>
+                            <th>Charge</th>
+                            <th>Start</th>
+                            <th>Quantity</th>
+                            <th>Service Name</th>
+                            <th>Status</th>
+                            <th>Remain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="9">No Data Found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <nav id="footer"></nav>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab functionality
+            const tabs = document.querySelectorAll(".tab");
+            const tabContents = document.querySelectorAll(".tab-content");
+
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", function () {
+                    const tabId = this.getAttribute("data-tab");
+
+                    // Remove active class from all tabs and tab contents
+                    tabs.forEach((t) => t.classList.remove("active"));
+                    tabContents.forEach((content) => content.classList.remove("active"));
+
+                    // Add active class to the clicked tab and corresponding content
+                    this.classList.add("active");
+                    const activeContent = document.getElementById(tabId);
+                    if (activeContent) {
+                        activeContent.classList.add("active");
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#header").load("header-secured.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</body>
+
+</html>

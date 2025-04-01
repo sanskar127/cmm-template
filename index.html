@@ -5,25 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link rel="stylesheet" href="stylesheet.css" />
   <title>SpaceX Panel Demo</title>
 </head>
 
 <body>
-  <header>
-    <div class="header-container">
-      <nav class="top-nav">
-        <ul>
-          <li class="nav-active"><a href="index.html">Signin</a></li>
-          <li><a href="signup.html">Signup</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="api.html">API</a></li>
-          <li><a href="secure/neworder.html">Secured</a></li>
-        </ul>
-      </nav>
-      <h2>SPACEXPANEL DEMO</h2>
-    </div>
-  </header>
+  <header id="header"></header>
+
+  <div class="divider-top"></div>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -35,9 +25,9 @@
 
     <!-- Call to Action -->
     <section class="call-to-action">
-      <div class="card">
+      <div class="card form-type1">
         <h2>Log into your account</h2>
-        <form id="login-form" action="#" method="post">
+        <form id="login-form" action="neworder.html" method="get">
           <div class="input-group">
             <i data-lucide="user" class="input-icon"></i>
             <input type="text" name="uname-email" id="uname-email" placeholder="Username/email" required />
@@ -60,7 +50,7 @@
         </form>
 
         <div class="create-account">
-          Create an <a href="#">account</a>
+          Create an <a href="signup.html">account</a>
         </div>
       </div>
     </section>
@@ -144,19 +134,26 @@
 
     <div class="card-wrapper">
       <div class="card review">
-        <p>I couldn't figure out the best way to promote my business online that could be effective and affordable at the same time. This SMM panel is the best solution I've found so far! Just check their prices — you really can't go wrong with that.</p>
+        <p>I couldn't figure out the best way to promote my business online that could be effective and affordable at
+          the same time. This SMM panel is the best solution I've found so far! Just check their prices — you really
+          can't go wrong with that.</p>
         <h4>Jane Kim</h4>
       </div>
       <div class="card review">
-        <p>If you're wondering how you can help your social media accounts get more attention fast, this is it! No need to wait for a long time either because SMM services on this panel are delivered super quickly. The services are sooo cheap too.</p>
+        <p>If you're wondering how you can help your social media accounts get more attention fast, this is it! No need
+          to wait for a long time either because SMM services on this panel are delivered super quickly. The services
+          are sooo cheap too.</p>
         <h4>Olivia Jenkins</h4>
       </div>
       <div class="card review">
-        <p>When I just started my business, I didn't have a big budget and couldn't pay SMM agencies to work on my accounts. But finding this SMM panel solved this problem for good — now I can order any SMM services I want at such affordable prices!</p>
+        <p>When I just started my business, I didn't have a big budget and couldn't pay SMM agencies to work on my
+          accounts. But finding this SMM panel solved this problem for good — now I can order any SMM services I want at
+          such affordable prices!</p>
         <h4>Roy Jefferson</h4>
       </div>
       <div class="card review">
-        <p>I help individuals and businesses get their social media pages noticed online, and this SMM panel definitely makes my job so much easier. It also helped me earn so much more, highly, HIGHLY recommend.</p>
+        <p>I help individuals and businesses get their social media pages noticed online, and this SMM panel definitely
+          makes my job so much easier. It also helped me earn so much more, highly, HIGHLY recommend.</p>
         <h4>Deepak Puri</h4>
       </div>
     </div>
@@ -176,7 +173,8 @@
           <i data-lucide="chevron-down" class="faq-icon"></i>
         </div>
         <div class="faq-answer">
-          <p>SMM panels are online stores that offer SMM services of different kinds. They provide an affordable and efficient way to boost social media presence without requiring technical expertise.</p>
+          <p>SMM panels are online stores that offer SMM services of different kinds. They provide an affordable and
+            efficient way to boost social media presence without requiring technical expertise.</p>
         </div>
       </div>
 
@@ -186,7 +184,8 @@
           <i data-lucide="chevron-down" class="faq-icon"></i>
         </div>
         <div class="faq-answer">
-          <p>Of course! It's definitely safe to use all our SMM services, you won't lose your accounts. We use only the highest quality methods that comply with platform guidelines.</p>
+          <p>Of course! It's definitely safe to use all our SMM services, you won't lose your accounts. We use only the
+            highest quality methods that comply with platform guidelines.</p>
         </div>
       </div>
 
@@ -196,7 +195,9 @@
           <i data-lucide="chevron-down" class="faq-icon"></i>
         </div>
         <div class="faq-answer">
-          <p>Grow your accounts as fast as you want with the help of Drip-feed. How it works: let's say you want 2000 likes on your post. Instead of getting all 2000 at once, you can get 200 each day for 10 days, making growth appear more natural.</p>
+          <p>Grow your accounts as fast as you want with the help of Drip-feed. How it works: let's say you want 2000
+            likes on your post. Instead of getting all 2000 at once, you can get 200 each day for 10 days, making growth
+            appear more natural.</p>
         </div>
       </div>
 
@@ -206,7 +207,8 @@
           <i data-lucide="chevron-down" class="faq-icon"></i>
         </div>
         <div class="faq-answer">
-          <p>On our panel, we sell different types of SMM services: likes, followers, views, comments, and engagement for all major social media platforms including Instagram, TikTok, YouTube, Facebook, Twitter, and more.</p>
+          <p>On our panel, we sell different types of SMM services: likes, followers, views, comments, and engagement
+            for all major social media platforms including Instagram, TikTok, YouTube, Facebook, Twitter, and more.</p>
         </div>
       </div>
 
@@ -216,7 +218,9 @@
           <i data-lucide="chevron-down" class="faq-icon"></i>
         </div>
         <div class="faq-answer">
-          <p>A mass order is an effective way for users to save time, since it allows to place multiple orders with different links at once. This is especially useful for agencies and resellers who manage multiple accounts.</p>
+          <p>A mass order is an effective way for users to save time, since it allows to place multiple orders with
+            different links at once. This is especially useful for agencies and resellers who manage multiple accounts.
+          </p>
         </div>
       </div>
     </div>
@@ -282,8 +286,44 @@
           item.classList.toggle('active');
         });
       });
+
+      // Navbar
+
+      // Toggle navigation menu
+      const navbarToggle = document.querySelector('.navbar-toggle');
+      const navbarMenu = document.querySelector('.navbar-menu');
+
+      navbarToggle.addEventListener('click', function () {
+        navbarMenu.classList.toggle('active');
+        navbarToggle.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function (event) {
+        const isClickInsideNav = navbarMenu.contains(event.target);
+        const isClickOnToggle = navbarToggle.contains(event.target);
+
+        if (!isClickInsideNav && !isClickOnToggle && navbarMenu.classList.contains('active')) {
+          navbarMenu.classList.remove('active');
+          navbarToggle.classList.remove('active');
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768 && navbarMenu.classList.contains('active')) {
+          navbarMenu.classList.remove('active');
+          navbarToggle.classList.remove('active');
+        }
+      });
     });
   </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#header").load("header.html");
+      $("#footer").load("footer.html");
+     });
+    </script>
 </body>
 
 </html>
