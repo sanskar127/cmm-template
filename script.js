@@ -11,46 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Navbar functionality
-  const navbarToggle = document.querySelector(".navbar-toggle")
-  const navbarMenu = document.querySelector(".navbar-menu")
-
-  if (navbarToggle && navbarMenu) {
-    // Toggle navigation menu
-    navbarToggle.addEventListener("click", () => {
-      navbarMenu.classList.toggle("active")
-      navbarToggle.classList.toggle("active")
-    })
-
-    // Close menu when clicking outside
-    document.addEventListener("click", (event) => {
-      const isClickInsideNav = navbarMenu.contains(event.target)
-      const isClickOnToggle = navbarToggle.contains(event.target)
-
-      if (!isClickInsideNav && !isClickOnToggle && navbarMenu.classList.contains("active")) {
-        navbarMenu.classList.remove("active")
-        navbarToggle.classList.remove("active")
-      }
-    })
-
-    // Close menu when clicking on a nav link
-    const navLinks = document.querySelectorAll(".nav-link")
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        navbarMenu.classList.remove("active")
-        navbarToggle.classList.remove("active")
-      })
-    })
-
-    // Handle window resize
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 768 && navbarMenu.classList.contains("active")) {
-        navbarMenu.classList.remove("active")
-        navbarToggle.classList.remove("active")
-      }
-    })
-  }
-
   // Tab functionality
   const tabs = document.querySelectorAll(".tab")
   const tabContents = document.querySelectorAll(".tab-content")
