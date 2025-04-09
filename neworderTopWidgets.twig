@@ -1,0 +1,50 @@
+{% if addOnData["membership_modules"] is not empty %}
+	{% set membership = true %}
+{% endif %}
+
+
+{% if addOnData["points_modules"] is not empty %}
+	{% set points = true %}
+{% endif %}
+
+<section class="row1">
+
+	<div class="card stat-card">
+		<div class="stat-icon">
+			<i class="fas fa-user"></i>
+		</div>
+		<h3>{{ user["username"] }}</h3>
+		<p>Welcome to
+			{{settings["site_title"]}}!</p>
+	</div>
+
+	<div class="card stat-card">
+		<div class="stat-icon">
+			<i class="fas fa-dollar-sign"></i>
+		</div>
+		<h3>{{convert_currency(user["spent"])}}</h3>
+		<p>Total Spent</p>
+	</div>
+
+	<div class="card stat-card">
+		<div class="stat-icon">
+			<i class="fas fa-check-square"></i>
+		</div>
+		<h3>{{totalOrdersCount}}</h3>
+		<p>Total Orders</p>
+	</div>
+
+	<div class="card stat-card">
+		<div class="stat-icon">
+			<i class="fas fa-dollar-sign"></i>
+		</div>
+		<h3>{{convert_currency(user["balance"])}}</h3>
+		<p>Total Balance</p>
+		{% if points == true %}
+			<p>
+				My Points :
+				{{user["user_points"]["available"]}}
+			</p>
+		{% endif %}
+	</div>
+</section>

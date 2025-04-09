@@ -1,0 +1,460 @@
+{% include 'header.twig' %}
+
+
+<div class="wrapper-content">
+    <div class="wrapper-content__header"></div>
+    <div
+        class="wrapper-content__body">
+
+
+        <!-- Main variables *content* -->
+        {% if user["auth"] != 1 %}
+
+        {% if contentText is not empty %}
+        <div id="block_358">
+            <div class="services-list">
+                <div class="bg"></div>
+                <div class="divider-top"></div>
+                <div class="divider-bottom"></div>
+                <div class="container-fluid">
+                    <div class="row add-funds__form-alignment px-lg-4">
+                        <div class="col-lg-8 col-md-offset-2">
+                            <div class="component_card">
+                                <div class="card">
+
+                                    {{ contentText }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        <div id="block_358">
+
+            <div class="services-list ">
+                <div class="bg"></div>
+                <div class="divider-top"></div>
+                <div class="divider-bottom"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="services_filters services_filter-margin component_filter_button component_filter_form_group component_filter_card">
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-md-auto mb-3 mb-md-0">
+                                            <div class="dropdown">
+                                                <a class="btn filter-primary w-sm-auto w-100 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="far fa-filter"></span>
+                                                    <span class="services-filter__active-category" data-filter-active-category="true"></span>
+                                                </a>
+                                                <div style="max-height:350px; max-width:300px; overflow:auto;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                                                    <a class="dropdown-item" data-filter-category-id="All">All</a>
+                                                    {% for category in serviceCategory %}
+                                                    <a class="dropdown-item" data-filter-category-id="{{ category["category_id"] }}" data-filter-category-name="{{ category["category_name"] }}">{{ category["category_name"] }}</a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-auto mb-3 mb-md-0">
+                                            <div class="dropdown">
+                                                <a class="btn filter-primary w-sm-auto w-100 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    {{ guest_pref_curr }}
+                                                </a>
+                                                <div style="max-height:350px; max-width:300px; overflow:auto;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+
+                                                    {% for currency in currencies %}
+                                                    <a class="dropdown-item" href="{{ site['url'] }}?user_pref_curr={{currency['currency_name']}}">{{currency['currency_name']}}</a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" data-search-service="#service-table-21">
+                                                <span class="input-group-append component_button_search">
+                                                    <button class="btn btn-secondary" type="button" data-filter-serch-btn="true">
+                                                        <i class="far fa-search"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="services-list__table">
+                                <div class="table-bg component_table" id="service-table-21">
+                                    {% for category in serviceCategory %}
+                                    <div class="table-wr table-responsive mb-3" data-filter-table-wrapper="{{ category["category_id"] }}">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    {% if site["modules"]["favorite_services"] %}
+                                                    <th></th>
+                                                    {% endif %}
+                                                    <th>{{lang["services.id"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.name"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.price"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.min"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.max"]}}</th>
+                                                    {% if settings["service_avg_time"] != 1 %}
+                                                    <th class="nowrap">{{lang["services.average_time"]}}</th>
+                                                    {% endif %}
+                                                    <th class="hidden-xs hidden-sm service-description__th">{{lang["services.desc"]}}</th>
+                                                </tr>
+                                            </thead>
+                                            <thead>
+                                                <th colspan="100%" class="styles-services-default services-category">
+                                                    <span class="category-icon">
+                                                        {% if category['category_icon']['iconType'] == 'image' %}
+                                                        <img class="category-icon__img" src="{{ category['category_icon']['icon'] }}" alt="{{ category['category_name'] }}">
+                                                        {% endif %}
+                                                        {% if category['category_icon']['iconType'] == 'icon' %}
+                                                        <span class="category-icon__icon"><i class='{{ category['category_icon']['icon'] }}'></i></span>
+                                                        {% endif %}
+                                                        {% if category['category_icon']['iconType'] == 'emoji' %}
+                                                        <span class="category-icon__emoji">{{ category['category_icon']['icon'] }}</span>
+                                                        {% endif %}
+                                                    </span>
+                                                    {{ category["category_name"] }}
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                {% for service in category['services'] %}
+
+                                                <tr data-filter-table-category-id="{{ category["category_id"] }}">
+
+                                                    {% if site["modules"]["favorite_services"] %}
+                                                    <td>
+                                                        <span class="favouriteServiceToggle" data-service-id="{{ service["service_id"] }}">
+                                                            {% if service["isFav"] %}
+                                                            <i class="fas fa-star"></i>
+                                                            {% else %}
+                                                            <i class="far fa-star"></i>
+                                                            {% endif %}
+
+                                                        </span>
+                                                    </td>
+                                                    {% endif %}
+                                                    <td data-label="ID" data-filter-table-service-id="{{ service["service_id"] }}"><a style="cursor:pointer;" onclick="copyTextToClipboard('{{ service["service_id"]}}')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Click to copy!">{{ service["service_id"]}} <i class="fas fa-copy"></i></a></td>
+
+                                                    <td data-label="Service" class="table-service" data-filter-table-service-name="true">{{ service["service_name"] }}</td>
+
+                                                    <td data-label="Rate per 1000">
+
+
+                                                        {{convert_currency(service["service_price"])}}
+
+
+                                                    </td>
+                                                    <td data-label="Min order">{{ service["service_min"] }}</td>
+                                                    <td data-label="Max order">{{ service["service_max"] }}</td>
+                                                    {% if settings["service_avg_time"] != 1 %}
+                                                    <td>
+                                                        {{ service["service_avg_time"] }}</td>
+                                                    {% endif %}
+                                                    <td>
+                                                        {% if service["service_description"] %}
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="servis{{ service["service_id"] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">{{ service["service_name"] }}
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body text-left">
+                                                                        <p class="detail-data details-split-959">
+                                                                            {{ service["service_description"] }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-actions" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a href="javascript:void(0)" class="btn btn-actions " data-toggle="modal" data-target="#servis{{ service["service_id"] }}">
+                                                            View
+                                                        </a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <div class="wrapper-content__footer"></div>
+
+    {% if contentTextBottom is not empty %}
+
+
+    <div id="block_358">
+        <div class="add-funds__form">
+            <div class="bg"></div>
+            <div class="divider-top"></div>
+            <div class="divider-bottom"></div>
+            <div class="container-fluid">
+                <div class="row add-funds__form-alignment px-lg-4">
+                    <div class="col-lg-8">
+                        <div class="component_card">
+                            <div class="card">
+
+                                {{ contentTextBottom }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% else %}
+
+    {% if contentText is not empty %}
+    <div id="block_358">
+        <div class="services-list">
+            <div class="bg"></div>
+            <div class="divider-top"></div>
+            <div class="divider-bottom"></div>
+            <div class="container-fluid">
+                <div class="row add-funds__form-alignment">
+                    <div class="col-lg-12">
+                        <div class="component_card">
+                            <div class="card">
+
+                                {{ contentText }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    <!-- Main variables *content* -->
+    <div id="block_334">
+        <div class="services-list ">
+            <div class="bg"></div>
+            <div class="divider-top"></div>
+            <div class="divider-bottom"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="services_filters services_filter-margin component_filter_button component_filter_form_group component_filter_card">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-auto mb-3 mb-md-0">
+                                        <div class="dropdown">
+                                            <a class="btn filter-primary w-sm-auto w-100 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="far fa-filter"></span>
+                                                <span class="services-filter__active-category" data-filter-active-category="true"></span>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="max-height:400px; overflow-y:scroll;">
+                                                <a class="dropdown-item" data-filter-category-id="All">All</a>
+
+                                                {% for category in serviceCategory %}
+                                                <a class="dropdown-item" data-filter-category-id="{{ category["category_id"] }}" data-filter-category-name="{{ category["category_name"] }}">{{ category["category_name"] }}</a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" data-search-service="#service-table-334">
+                                            <span class="input-group-append component_button_search">
+                                                <button class="btn btn-secondary" type="button" data-filter-serch-btn="true">
+                                                    <i class="far fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="services-list__table">
+                            <div class="table-bg component_table " id="service-table-334">
+                                <div class="table-wr table-responsive mb-3">
+                                    {% for category in serviceCategory %}
+                                    <div class="table-wr table-responsive mb-3" data-filter-table-wrapper="{{ category["category_id"] }}">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>{{lang["services.id"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.name"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.price"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.min"]}}</th>
+                                                    <th class="nowwrap">{{lang["services.max"]}}</th>
+                                                    {% if settings["service_avg_time"] != 1 %}
+                                                    <th class="nowrap">{{lang["services.average_time"]}}</th>
+                                                    {% endif %}
+                                                    <th class="hidden-xs hidden-sm service-description__th">{{lang["services.desc"]}}</th>
+                                                </tr>
+                                            </thead>
+                                            <thead>
+                                                <th colspan="100%" class="styles-services-default services-category">
+                                                    <span class="category-icon">
+                                                        {% if category['category_icon']['iconType'] == 'image' %}
+                                                        <img class="category-icon__img" src="{{ category['category_icon']['icon'] }}" alt="{{ category['category_name'] }}">
+                                                        {% endif %}
+                                                        {% if category['category_icon']['iconType'] == 'icon' %}
+                                                        <span class="category-icon__icon"><i class='{{ category['category_icon']['icon'] }}'></i></span>
+                                                        {% endif %}
+                                                        {% if category['category_icon']['iconType'] == 'emoji' %}
+                                                        <span class="category-icon__emoji">{{ category['category_icon']['icon'] }}</span>
+                                                        {% endif %}
+                                                    </span>
+                                                    {{ category["category_name"] }}
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                {% for service in category['services'] %}
+                                                <tr data-filter-table-category-id="{{ category["category_id"] }}">
+                                                    <td>
+                                                        <span class="favouriteServiceToggle" data-service-id="{{ service["service_id"] }}">
+                                                            {% if service["isFav"] %}
+                                                            <i class="fas fa-star"></i>
+                                                            {% else %}
+                                                            <i class="far fa-star"></i>
+                                                            {% endif %}
+
+                                                        </span>
+                                                    </td>
+                                                    <td class="col-md-1" data-label="ID" data-filter-table-service-id="{{ service["service_id"] }}"><a style="cursor:pointer;" onclick="copyTextToClipboard('{{ service["service_id"]}}')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Click to copy!">{{ service["service_id"]}} <i class="fas fa-copy"></i></a></td>
+                                                    <td data-label="Service" class="table-service" data-filter-table-service-name="true">{{ service["service_name"] }}</td>
+
+                                                    <td data-label="Rate per 1000">
+
+                                                        {{convert_currency(service["service_price"])}}
+
+
+                                                    </td>
+                                                    <td data-label="Min order">{{ service["service_min"] }}</td>
+                                                    <td data-label="Max order">{{ service["service_max"] }}</td>
+                                                    {% if settings["service_avg_time"] != 1 %}
+                                                    <td>
+                                                        {{ service["service_avg_time"] }}</td>
+                                                    {% endif %}
+                                                    <td>
+                                                        {% if service["service_description"] %}
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="servis{{ service[" service_id"] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">{{ service["service_name"] }}
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body text-left">
+                                                                        <p class="detail-data details-split-959">
+                                                                            {{ service["service_description"] }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-actions" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a href="javascript:void(0)" class="btn btn-actions " data-toggle="modal" data-target="#servis{{ service[" service_id"] }}">
+                                                            View
+                                                        </a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade " tabindex="-1" role="dialog" id="service-description-334">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <i style="color: #b4c6d3;" class="fas fa-times"></i>
+                        </button>
+                        <div class="service-description-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if contentTextBottom is not empty %}
+
+
+    <div id="block_358">
+        <div class="add-funds__form">
+            <div class="bg"></div>
+            <div class="divider-top"></div>
+            <div class="divider-bottom"></div>
+            <div class="container-fluid">
+                <div class="row add-funds__form-alignment px-lg-4">
+                    <div class="col-lg-8">
+                        <div class="component_card">
+                            <div class="card">
+
+                                {{ contentTextBottom }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% endif %}
+    {% include 'footer.twig' %}

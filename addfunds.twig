@@ -1,0 +1,145 @@
+{% include 'header.twig' %}
+<!-- Main Content -->
+<section class="container">
+	{% if contentText is not empty %}
+		<div id="block_358">
+			<div class="add-funds__form">
+				<div class="bg"></div>
+				<div class="divider-top"></div>
+				<div class="divider-bottom"></div>
+
+				<div class="container-fluid">
+					<div class="row add-funds__form-alignment px-lg-4">
+						<div class="col-lg-8">
+							<div class="component_card">
+								<div class="card">
+
+									{{ contentText }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	{% endif %}
+
+	{% if error %}
+		<div class="alert alert-dismissible alert-danger">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			{{ errorText }}
+		</div>
+		<br/>
+	{% endif %}
+	{% if success %}
+		<div class="alert alert-dismissible alert-success">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			{{ successText }}
+		</div>
+		<br/>
+	{% endif %}
+
+
+	<section class="form">
+		<div class="card form-type2">
+			<h2>{{ lang['addfunds.online.title'] }}</h2>
+			{% if paymentsList %}
+				<form method="post" action="addfunds">
+					<div class="input-group">
+						<label for="method">{{ lang['addfunds.method'] }}</label>
+						<select class="form-control mt-10" id="payment_method_new" name="payment_type">
+							{% for payment in paymentsList %}
+								<option value="{{ payment['id'] }}" {% if data['payment_type'] == payment['id'] %} selected {% endif %}>{{ payment['method_name'] }}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<div id="amount_field" class="input-group"></div>
+					<input type="hidden" name="crsf_token" value="{{ csrf_token() }}">
+					<div id="button_field" class="input-group"></div>
+				</form>
+		{% else %}
+			</div>
+		</section>
+
+		<div class="gap"></div>
+
+		<section class="form">
+			<div class="card form-type2">
+				{% if settings["coupon_system"] == 2 %}`
+					<form method="post" action="kupon">
+						<div class="input-group">
+							<label for="category">{{lang["addfunds.coupon.label"]}}</label>
+							<input class="mt-10" type="text" id="kuponadi" name="kuponadi">
+						</div>
+
+						<input type="hidden" name="crsf_token" value="{{ csrf_token() }}">
+
+						<button type="submit" class="primary btn-block">{{lang["addfunds.coupon.button.text"]}}</button>
+					</form>
+				{% endif %}
+			</div>
+		</section>
+
+		<div class="gap"></div>
+
+		<!-- Services Table -->
+		<section class="table-container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>{{lang["addfunds.transaction.id"]}}</th>
+						<th>{{ lang["addfunds.transaction.amount"] }}</th>
+						<th class="width-40">{{ lang["addfunds.transaction.method"] }}</th>
+						<th>{{ lang["addfunds.transaction.date"] }}</th>
+						<th class="nowrap">{{ lang["addfunds.transaction.transId"] }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for transaction in transactions %}
+						<tr>
+							<td>{{ transaction['payment_id'] }}</td>
+
+
+							<td>
+								{{ convert_currency(transaction['payment_amount'])}}
+
+							</td>
+
+
+							<td>{{ transaction['method_name'] }}</td>
+							<td>{{ show_date(transaction['payment_create_date']) }}</td>
+							<td>{{ transaction['payment_extra'] }}</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
+        {% if contentTextBottom is not empty %}
+		<div id="block_358">
+			<div class="add-funds__form">
+				<div class="bg"></div>
+				<div class="divider-top"></div>
+				<div class="divider-bottom"></div>
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="component_card">
+								<div class="card">
+
+									{{ contentTextBottom }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	{% endif %}
+	</section>
+
+	{% include 'footer.twig' %}

@@ -1,0 +1,220 @@
+<!-- Main Content -->
+<section
+	class="box">
+	<!-- Order Status Tabs -->
+	<div class="tabs">
+		<a href="{{site["url"]}}/orders">
+			<button class="tab {% if 'all' == status %} active {% endif %}" \>{{ lang['orders.status.all'] }}</button>
+		</a>
+		<a href="{{site["url"]}}/orders/pending">
+			<button class="tab {% if '' == status %} active {% endif %}" \>{{ lang['orders.status.pending'] }}</button>
+		</a>
+		<a href="{{site["url"]}}/orders/inprogress">
+			<button class="tab {% if 'inprogress' == status %} active {% endif %}" \>{{ lang['orders.status.inprogress'] }}</button>
+		</a>
+		<a href="{{site["url"]}}/orders/completed">
+			<button class="tab {% if 'completed' == status %} active {% endif %}" \>{{ lang['orders.status.completed'] }}</button>
+		</a>
+		<a href="{{site["url"]}}/orders/partial">
+			<button class="tab {% if 'partial' == status %} active {% endif %}" \>{{ lang['orders.status.partial'] }}</button>
+		</a>
+		<a href="{{site["url"]}}/orders/processing">
+			<button class="tab {% if 'processing' == status %} active {% endif %}" \>{{ lang['orders.status.processing'] }}</button>
+		</a>
+		<a href="{{site["url"]}}/orders/canceled">
+			<button class="tab {% if 'canceled' == status %} active {% endif %}" \>{{ lang['orders.status.canceled'] }}</button>
+		</a>
+	</div>
+
+	<!-- Search -->
+	<div class="search-filter-container">
+		<form action="" method="get" id="history-search">
+			<div class="searchbar" style="flex: 1; margin-bottom: 0;">
+				<i class="fas fa-search"></i>
+				<input type="search" name="search" value="{{ search }}" placeholder="Search orders">
+			</div>
+		</div>
+
+		<!-- Tab Content Sections -->
+		<div
+			class="tab-content-container">
+			<!-- All Tab Content -->
+			<section id="all" class="table-container tab-content active">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>{{ lang['orders.id'] }}</th>
+							<th>{{ lang['orders.date'] }}</th>
+							<th>{{ lang['orders.link'] }}</th>
+							<th>{{ lang['orders.charge'] }}</th>
+							<th>{{ lang['orders.start.count'] }}</th>
+							<th>{{ lang['orders.quantity'] }}</th>
+							<th>{{ lang['orders.service'] }}</th>
+							<th>{{ lang['orders.status'] }}</th>
+							<th>{{ lang['orders.remains'] }}</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for order in orders %}
+							<tr>
+								<td>{{ order['id'] }}</td>
+								<td>{{ show_date(order['date']) }}</td>
+								<td class="width-40">
+									<a href="{{ order['link'] }}" target="_blank">{{ order['link'] }}</a>
+								</td>
+
+								<td>{{convert_currency(order['charge'])}}</td>
+								<td class="nowrap">{{ order['start_count'] }}</td>
+								<td>{{ order['quantity'] }}</td>
+								<td>{{ order['service'] }}</td>
+
+								<td>{{ order['status'] }}
+									{% if order["completion_time"] %}
+										<button class="btn btn-actions">
+											{{ order["completion_time"] }}
+										</button>
+
+									{% endif %}
+								</td>
+
+								<td>{{ order['remains'] }}
+
+									{% if order['refillButton'] != 1 and order['refillButton'] != 4 %}
+
+
+										<div style="display:inline-block;" class="tooltip-wrapper" data-toggle={% if order['refillButton'] == 3 %} tooltip {% endif %} data-placement="top" title="" data-original-title="Next Refill will be available after {{ order['refillTimeLeft'] }} ">
+											<a href="{% if order['refillButton'] == 3 %} javascript:void(0) {% else %} {{site["url"]}}/orders/refill/{{ order['id'] }} {% endif %}">
+												<button type="button" class="refill-button btn btn-actions {% if order['refillButton'] == 3 %} disabled {% endif %}" data-order-id="{{ order['id'] }}">{{lang["orders.button.refill"]}}</button>
+											</a>
+										</div>
+
+									{% elseif order['refillButton'] == 4 %}
+										{{lang["orders.status.refilling"]}}
+									{% endif %}
+
+									{# Show cancel button #}
+									{% if order['cancelButton'] == 1 %}
+										<a href="{{site["url"]}}/orders/cancel/{{ order['id'] }}">
+											<button style="background-color:red;" class="btn btn-actions">
+												Cancel
+											</button>
+										</a>
+									{% endif %}
+
+									{# Show cancel button #}
+								</td>
+
+								<td>
+									{% if site["modules"]['reorder_button'] %}
+
+										<a href="?select_service_id={{order[" service_id"]}}">
+											<button type="button" class="btn btn-actions ">reorder</button>
+										</a>
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</section>
+
+			<!-- Pending Tab Content -->
+			<section id="pending" class="table-container tab-content">
+				<table>
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Date</th>
+							<th>Link</th>
+							<th>Charge</th>
+							<th>Start</th>
+							<th>Quantity</th>
+							<th>Service Name</th>
+							<th>Status</th>
+							<th>Remain</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="9">No Data Found</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<!-- In-progress Tab Content -->
+			<section id="in-progress" class="table-container tab-content">
+				<table>
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Date</th>
+							<th>Link</th>
+							<th>Charge</th>
+							<th>Start</th>
+							<th>Quantity</th>
+							<th>Service Name</th>
+							<th>Status</th>
+							<th>Remain</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="9">No Data Found</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<!-- Completed Tab Content -->
+			<section id="completed" class="table-container tab-content">
+				<table>
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Date</th>
+							<th>Link</th>
+							<th>Charge</th>
+							<th>Start</th>
+							<th>Quantity</th>
+							<th>Service Name</th>
+							<th>Status</th>
+							<th>Remain</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="9">No Data Found</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+
+		<nav id="footer"></nav>
+	</section>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () { // Tab functionality
+const tabs = document.querySelectorAll(".tab");
+const tabContents = document.querySelectorAll(".tab-content");
+
+tabs.forEach((tab) => {
+tab.addEventListener("click", function () {
+const tabId = this.getAttribute("data-tab");
+
+// Remove active class from all tabs and tab contents
+tabs.forEach((t) => t.classList.remove("active"));
+tabContents.forEach((content) => content.classList.remove("active"));
+
+// Add active class to the clicked tab and corresponding content
+this.classList.add("active");
+const activeContent = document.getElementById(tabId);
+if (activeContent) {
+activeContent.classList.add("active");
+}
+});
+});
+});
+	</script>

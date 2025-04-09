@@ -1,0 +1,172 @@
+{% include 'header.twig' %}
+
+<!-- Main Content -->
+<section
+	class="box" id="main">
+	<!-- Order Status Tabs -->
+	<div class="tabs">
+		<a href="/account">
+			<button class="tab active" id="general" data-tab="general">General</button>
+		</a>
+		<a href="/notifications">
+			<button class="tab" id="notifications" data-tab="notifications">Notifications</button>
+		</a>
+	</div>
+
+	<!-- Tab Content -->
+	<section class="form-wide">
+		{% if contentText is not empty %}
+			<br>
+
+			<div class="container-fluid mb-3">
+				<div class="component_content_card component_content_button component_content_headers">
+					<div class="card">
+						<div class="new-order__content-title">
+							<div class="position-relative">
+								{{contentText}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+		<div class="card form form-type2">
+			{% if error %}
+				<div class="alert alert-dismissible alert-danger">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					{{ errorText }}
+				</div>
+			{% endif %}
+			{% if success %}
+				<div class="alert alert-dismissible alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					{{ successText }}
+				</div>
+			{% endif %}
+			<div>
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.username'] }}</label>
+					<input class="mt-10" type="text" id="username" value="{{ user['username'] }}" disabled="disabled">
+				</div>
+
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.name'] }}</label>
+					<input class="mt-10" type="text" id="name" value="{{ user['name'] }}" readonly>
+				</div>
+
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.email'] }}</label>
+					<input class="mt-10" type="text" name="whatsapp" id="email" value="{{ user['email'] }}" readonly>
+				</div>
+
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.telephone'] }}</label>
+					<input class="mt-10" type="text" id="telephone" value="{{ user['telephone'] }}" readonly>
+				</div>
+			</div>
+
+			<div>
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.balance'] }}</label>
+					<input class="mt-10" type="text" value="{{convert_currency(user['balance'])}}" readonly>
+				</div>
+
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.spent'] }}</label>
+					<input class="mt-10" type="text" value="{{convert_currency(user['spent'])}}" readonly>
+				</div>
+			</div>
+
+			<form method="post" action="account">
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.password.current'] }}</label>
+					<input class="mt-10" type="password" value="" name="current_password">
+				</div>
+
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.password.new'] }}</label>
+					<input class="mt-10" type="password" value="" name="password">
+				</div>
+
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.password.confirm'] }}</label>
+					<input class="mt-10" type="password" value="" name="confirm_password">
+				</div>
+
+				<input type="hidden" name="crsf_token" value="{{ csrf_token() }}">
+
+				<button type="submit" class="primary btn-block">{{ lang['account.password.button'] }}</button>
+			</form>
+
+			{% if site['languages']|length > 1 %}
+				<form method="post" action="account/change_lang">
+					<div class="input-group">
+						<label for="category" class="form-label">{{ lang['account.changelang.title'] }}</label>
+						<select id="category" class="form-control mt-10" name="lang">
+							{% for language in site['languages'] %}
+								<option {% if language["code"] == user["lang"] %} selected {% endif %} value="{{ language["code"] }}">{{ language["name"] }}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<input type="hidden" name="crsf_token" value="{{ csrf_token() }}">
+
+					<button type="submit" class="primary btn-block">{{ lang['account.changelang.button'] }}</button>
+				</form>
+			{% endif %}
+
+			<form method="post" action="account/change_lang">
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.timezone.title'] }}</label>
+					<select id="category" class="form-control mt-10" name="timezone">
+						{% for timezone, name in timezones %}
+							<option {% if timezone == user['timezone'] %} selected {% endif %} value="{{ timezone }}">{{ name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<input type="hidden" name="crsf_token" value="{{ csrf_token() }}">
+
+				<button type="submit" class="primary btn-block">{{ lang['account.timezone.button'] }}</button>
+			</form>
+
+			<form method="post" action="account/newapikey">
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.api.url'] }}</label>
+					<input class="mt-10" type="text" value="{{ site['url'] }}/api/v2" readonly>
+				</div>
+
+				{% if settings["otp_login"] %}
+					<div class="form-group">
+						<label>
+							Two-factor authentication</label>
+						<div class="mb-4">
+							Email-based option to add an extra layer of protection to your account. When signing in you’ll need to enter a code that will be sent to your email address.
+						</div>
+
+						{% if user["user2FA"] %}
+							<a class="btn btn-block btn-big-primary" href="{{site['url']}}/account/2fa/disable">
+								Disable
+							</a>
+						{% else %}
+							<a class="btn btn-block btn-big-primary" href="{{site['url']}}/account/2fa/enable">
+								Enable
+							</a>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				<div class="input-group">
+					<label for="category" class="form-label">{{ lang['account.api.key'] }}</label>
+					<input class="mt-10" type="text" {% if settings["user_api_key"] == 2 %} data-toggle="tooltip" data-placement="top" title="The key is hidden for security reasons" {% endif %} value="{{ api_key }}" readonly>
+				</div>
+
+				<input type="hidden" name="crsf_token" value="{{ csrf_token() }}">
+				<button type="submit" class="primary btn-block">{{ lang['account.generate.key'] }}</button>
+			</form>
+		</div>
+
+	</section>
+</section>
+
+{% include 'footer.twig' %}

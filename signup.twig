@@ -1,0 +1,115 @@
+{% include 'header.twig' %}
+
+<!-- Call to Action -->
+<div class="container">
+	{% if contentText is not empty %}
+
+
+		<div id="block_358">
+			<div class="add-funds__form">
+				<div class="bg"></div>
+				<div class="divider-top"></div>
+				<div class="divider-bottom"></div>
+				<div class="container-fluid">
+					<div class="row add-funds__form-alignment px-lg-4">
+						<div class="col-lg-8">
+							<div class="component_card">
+								<div class="card">
+
+									{{ contentText }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	<section class="call-to-action center-div">
+		{% if errorText %}
+			<div class="alert alert-dismissible alert-danger">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				{{ errorText }}
+			</div>
+			<br>
+		{% endif %}
+		{% if successText %}
+			<div class="alert alert-dismissible alert-success">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				{{ successText }}
+			</div>
+			<br>
+		{% endif %}
+
+		<div class="card form form-type1">
+			<h2>Create a new account</h2>
+			<form action="" method="post">
+				{% for field in fields %}
+
+					<div class="input-group">
+						<i data-lucide="user" class="input-icon"></i>
+						<input type="{{ field['type'] }}" id="{{ field['name'] }}" name="{{ field['name'] }}" placeholder="{{ lang[field['field_name']] }}" {% if field["type"] == "text" %} value="{{ data[field['field_name']] }}" {% endif %} {% if field['required'] %} required {% endif %}>
+					</div>
+
+					{% if field['name'] == "name" %}
+						<div class="input-group">
+							<i data-lucide="user" class="input-icon"></i>
+							<input type="{{ field['type'] }}" name="uname" id="uname" placeholder="{{ lang["signup.last.name"] }}" id="{{ field['name'] }}" name="last_name" {% if field["type"] == "text" %} value="{{ data[field['field_name']] }}" {% endif %} {% if field['required'] %} required {% endif %}>
+						</div>
+					{% endif %}
+
+				{% endfor %}
+
+				{% if captcha %}
+					<div class="form-group">
+						<div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+					</div>
+				{% endif %}
+
+				<div class="row-3">
+					<div class="checkbox">
+						<input type="checkbox" name="terms" value="1" id="terms"/>
+						<label for="terms">{{ lang['signup.accept_terms_text'] }}</label>
+						
+					</div>
+				</div>
+
+				<input type="hidden" name="csrf" value="{{ csrf_token() }}">
+
+				<button type="submit" class="submit-btn">{{ lang['signup.button'] }}</button>
+			</form>
+
+			<div class="create-account">
+				{{ lang['signup.already.account'] }}
+				<a href="/">{{lang["signin.button"]}}</a>
+			</div>
+
+			{% if contentTextBottom is not empty %}
+
+
+				<div id="block_358">
+					<div class="add-funds__form">
+						<div class="bg"></div>
+						<div class="divider-top"></div>
+						<div class="divider-bottom"></div>
+						<div class="container-fluid">
+							<div class="row add-funds__form-alignment px-lg-4">
+								<div class="col-lg-8">
+									<div class="component_card">
+										<div class="card">
+
+											{{ contentTextBottom }}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</section>
+</div>
+
+{% include 'footer.twig' %}

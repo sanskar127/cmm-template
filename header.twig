@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ site.url }}/public/uploads/e9ba6274f0c4159ced295f3b114afc26.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>{{ title | default('SPACEXPANEL') }}</title>
+</head>
+
+<div style="display:none;" id="loadderr" class="container">
+    <div class="row">
+        <div style="margin:auto;" id="loading">
+            <img id="loading-image" src="{{ site['url'] }}/public/ajax-loading.gif" alt="Loading..." />
+            <br>
+            <h3 id="processing">
+                Processing Payment....
+            </h3>
+        </div>
+    </div>
+</div>
+
+{% if user['auth'] %}
+
+<body class="body ">
+    <div class="wrapper  wrapper-sidebar-navbar ">
+        <div id="block_357" class="component_private_navbar">
+            <span class="component_private_navbar ">
+                <div class="component-navbar-private__wrapper">
+                    <div
+                        class="sidebar-block__top-static component-navbar component-navbar__navbar-private editor__component-wrapper">
+                        <div>
+                            <nav class="navbar navbar-expand-lg navbar-light">
+                                <div class="sidebar-block__top-brand">
+                                    <div class="component-navbar-brand component-navbar-private-brand">
+
+
+                                        <a style="margin-left:20px; " target="_self" class="navbar-brand"
+                                            href="{{ site['url'] }}">
+
+
+                                            <span style="text-transform: uppercase">
+                                                <span style="font-size: 24px">
+                                                    <span style="letter-spacing: 1.0px">
+                                                        <span style="line-height: 48px">
+                                                            {% if site["logo"] %}
+                                                            <img style="max-width:200px;" src="{{ site['logo'] }}"
+                                                                alt="" title="">
+                                                            {% else %}
+                                                            <p style="font-weight:700;">
+                                                                {{ site["site_name"] }}
+                                                            </p>
+                                                            {% endif %}
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbar-collapse-34" aria-controls="navbar-collapse-34"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-burger">
+                                        <span class="navbar-burger-line"></span>
+                                    </span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbar-collapse-34">
+                                    <div class="d-flex component-navbar-collapse">
+                                        <ul class="navbar-nav navbar-nav-sidebar-menu">
+
+
+                                            {% for page in pagesInformation %}
+
+                                            {% set page_get = page["page_get"] %}
+                                            {% set page_icon = page["page_icon"] %}
+
+
+                                            <li
+                                                class="nav-item component-navbar-nav-item component-navbar-private-nav-item {% if active_menu == page_get %} active{% endif %}">
+                                                <a class="component-navbar-nav-link component-navbar-nav-link__navbar-private {% if active_menu == "
+                                                    #{page_get}" %} component-navbar-nav-link-active__navbar-private {%
+                                                    endif %}" href="{{site['url']}}/{{page_get}}">
+
+                                                    <i style="margin-right: 5px;" class="{{ page_icon }}"></i>
+
+                                                    {% set custom_page = page["custom_page"] %}
+                                                    {% set page_name = page["page_name"] %}
+                                                    {% if custom_page == 1 %}
+                                                    {{ lang["#{page_get}.title"] }}
+                                                    {% else %}
+                                                    {{page_name}}
+                                                    {% endif %}
+
+                                                    {% if page_get == "tickets" %}
+                                                    {% if ticketCount %}
+                                                    <span style="background-color:yellow; color:black;" class="badge">{{
+                                                        ticketCount }}
+                                                    </span>
+                                                    {% endif %}
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+
+                                            {% endfor %}
+
+                                            <li
+                                                class="nav-item component-navbar-nav-item component-navbar-private-nav-item">
+                                                <a class="component-navbar-nav-link  component-navbar-nav-link__navbar-private"
+                                                    href="{{ site['url'] }}/account"><i class="fad fa-user"
+                                                        style="margin-right: 5px;"></i> Account</a>
+                                            </li>
+                                            <li
+                                                class="nav-item component-navbar-nav-item component-navbar-private-nav-item">
+                                                <a class="component-navbar-nav-link  component-navbar-nav-link__navbar-private"
+                                                    href="{{ site['url'] }}/logout"><i class="fad fa-sign-out-alt"
+                                                        style="margin-right: 5px;"></i> Logout</a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="navbar-nav navbar-nav-currencies">
+
+                                            <div class="balance-dropdown-container component_balance_dropdown">
+                                                <div class="balance-dropdown">
+                                                    <div class="balance-dropdown__name balance-dropdown__toggle"
+                                                        data-toggle="dropdown" data-hover="dropdown"
+                                                        aria-expanded="false">
+                                                        {{convert_currency(user['balance'])}}
+                                                    </div>
+                                                    <ul class="balance-dropdown__container dropdown-menu"
+                                                        id="currencies-list">
+                                                        {% for currency in currencies %}
+
+                                                        <li class="balance-dropdown__item">
+                                                            <a href="{{ site['url'] }}?user_pref_curr={{currency['currency_name']}}"
+                                                                class="currencies-item balance-dropdown__link">{{currency['currency_name']}}</a>
+                                                        </li> {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </span>
+
+            <span class="component_private_sidebar ">
+                <div class="component-sidebar_wrapper ">
+                    <div
+                        class="sidebar-block__left component-sidebar component-sidebar-with-navbar editor__component-wrapper component_private_navbar">
+                        <div class="component-sidebar__menu-wrapper">
+                            <div class="sidebar-block__top-brand">
+                                <div class="component-navbar-brand component-navbar-private-brand">
+                                    <a style="margin-left:20px; " target="_self" class="navbar-brand"
+                                        href="{{ site['url'] }}">
+
+
+                                        <span style="text-transform: uppercase">
+                                            <span style="font-size: 24px">
+                                                <span style="letter-spacing: 1.0px">
+                                                    <span style="line-height: 48px">
+                                                        {% if site["logo"] %}
+                                                        <img style="max-width:200px;" src="{{ site['logo'] }}" alt=""
+                                                            title="">
+                                                        {% else %}
+                                                        <p style="font-weight:700;">
+                                                            {{ site["site_name"] }}
+                                                        </p>
+                                                        {% endif %}
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+
+
+                                    </a>
+
+                                </div>
+                            </div>
+                            <ul class="component-sidebar__menu sidebar-block__left-menu">
+
+
+                                {% for page in pagesInformation %}
+
+                                {% set page_get = page["page_get"] %}
+                                {% set page_icon = page["page_icon"] %}
+
+
+                                <li class="component-sidebar__menu-item {% if active_menu == " #{page_get}" %}
+                                    component-sidebar__menu-item-active {% endif %}">
+                                    <a class="component-sidebar__menu-item-link" href="{{site['url']}}/{{page_get}}">
+                                        <span class="component-sidebar__menu-item-name">
+                                            <i style="margin-right: 5px;" class="{{ page_icon }}"></i>
+                                            {% set custom_page = page["custom_page"] %}
+                                            {% set page_name = page["page_name"] %}
+                                            {% if custom_page == 1 %}
+                                            {{ lang["#{page_get}.title"] }}
+                                            {% else %}
+                                            {{page_name}}
+                                            {% endif %}
+
+                                            {% if page_get == "tickets" %}
+                                            {% if ticketCount %}
+                                            <span style="background-color:yellow; color:black;" class="badge">{{
+                                                ticketCount }}
+                                            </span>
+                                            {% endif %}
+                                            {% endif %}
+                                    </a>
+                                </li>
+
+
+                                {% endfor %}
+                                <li class="component-sidebar__menu-item ">
+                                    <a class="component-sidebar__menu-item-link" href="{{ site['url'] }}/account">
+                                        <span class="component-sidebar__menu-item-name">
+                                            <i style="margin-right: 5px;" class="fad fa-user"></i>
+                                            Account
+
+                                        </span></a>
+                                </li>
+                                <li class="component-sidebar__menu-item ">
+                                    <a class="component-sidebar__menu-item-link" href="{{ site['url'] }}/logout">
+                                        <span class="component-sidebar__menu-item-name">
+                                            <i style="margin-right: 5px;" class="fad fa-sign-out-alt"></i>
+                                            Logout
+
+                                        </span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </span>
+
+        </div>
+
+
+
+        {% else %}
+
+        <body>
+            <header class="navbar">
+                <div class="navbar-container">
+                    <div class="navbar-logo">
+                        <button class="navbar-toggle" aria-label="Toggle navigation menu">
+                            <i class="fas fa-bars menu-icon"></i>
+                            <i class="fas fa-times close-icon"></i>
+                        </button>
+                        {% if site["logo"] %}
+                        <img style="max-width:200px;" src="{{ site['logo'] }}" alt="" title="">
+                        {% else %}
+                        <h2 style="font-weight:700;">
+                            {{ site["site_name"] }}
+                        </h2>
+                        {% endif %}
+                    </div>
+
+                    <nav class="navbar-menu">
+                        <ul class="navbar-nav">
+                            {% set menu_items = [{
+                            'name': 'Signin',
+                            'url': ''
+                            },
+                            {
+                            'name': 'Signup',
+                            'url': 'signup'
+                            },
+                            {
+                            'name': 'Services',
+                            'url': 'services'
+                            },
+                            {
+                            'name': 'API',
+                            'url': 'api'
+                            }] %}
+
+                            {% for item in menu_items %}
+                            <li class="nav-item">
+                                <a href="{{ site.url }}/{{ item.url }}" class="nav-link">{{ item.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="divider-top"></div>
+
+            {% endif %}
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const navbarToggle = document.querySelector(".navbar-toggle");
+                    const navbarMenu = document.querySelector(".navbar-menu");
+
+                    if (navbarToggle && navbarMenu) {
+                        navbarToggle.addEventListener("click", () => {
+                            navbarMenu.classList.toggle("active");
+                            navbarToggle.classList.toggle("active");
+                        });
+
+                        document.addEventListener("click", (event) => {
+                            const isClickInsideNav = navbarMenu.contains(event.target);
+                            const isClickOnToggle = navbarToggle.contains(event.target);
+
+                            if (!isClickInsideNav && !isClickOnToggle && navbarMenu.classList.contains("active")) {
+                                navbarMenu.classList.remove("active");
+                                navbarToggle.classList.remove("active");
+                            }
+                        });
+
+                        const navLinks = document.querySelectorAll(".nav-link");
+                        navLinks.forEach((link) => {
+                            link.addEventListener("click", () => {
+                                navbarMenu.classList.remove("active");
+                                navbarToggle.classList.remove("active");
+                            });
+                        });
+
+                        window.addEventListener("resize",
+                            () => {
+                                if (window.innerWidth > 768 && navbarMenu.classList.contains("active")) {
+                                    navbarMenu.classList.remove("active");
+                                    navbarToggle.classList.remove("active");
+                                }
+                            });
+                    }
+                });
+            </script>
+        </body>
+
+</html>

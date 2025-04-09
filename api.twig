@@ -1,0 +1,122 @@
+{% include 'header.twig' %}
+
+<div class="container">
+    {% if contentText is not empty %}
+    <div id="block_358">
+        <div class="services-list">
+            <div class="bg"></div>
+            <div class="divider-top"></div>
+            <div class="divider-bottom"></div>
+            <div class="container-fluid">
+                <div class="row add-funds__form-alignment px-lg-4">
+                    <div class="col-lg-12">
+                        <div class="component_card">
+                            <div class="card">
+
+                                {{ contentText }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <section>
+        <div class="heading-section">
+            <h3>{{lang["api.title.text"]}}</h3>
+        </div>
+
+        <div class="table-container ">
+            <table class="table data-table">
+                <tbody>
+                    <tr>
+                        <td>HTTP Method</td>
+                        <td>POST</td>
+                    </tr>
+                    <tr>
+                        <td>API Url</td>
+                        <td>{{ site["url"] }}/api/v2</td>
+                    </tr>
+                    {% if user['auth'] %}
+                    <tr>
+                        <td>API Key</td>
+                        <td>
+                            Get an API key on the
+                            <a href="{{ site[" url"] }}/account">Account</a>
+                            page
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Return Format</td>
+                        <td>JSON</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    {% for content in apiPageContent["apiData"] %}
+    <section>
+        <div class="heading-section">
+            <h4>{{content["heading"]}}</h4>
+        </div>
+
+        <div class="table-container ">
+            <table class="table data-table">
+                <thead>
+                    <tr>
+                        <th>{{apiPageContent["parameters"]}}</th>
+                        <th>{{apiPageContent["description"]}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for params, desc in content["parameters"] %}
+                    <tr>
+                        <td>{{params}}</td>
+                        <td>{{desc}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="heading-section">
+            <h5>{{apiPageContent["response"]}}</h5>
+        </div>
+
+        <pre class="card codeblock">{{content["code"]}}</pre>
+    </section>
+    {% endfor %}
+
+    <a style="text-decoration: none;" href="{{ site[" url"] }}/example.txt">
+        <button style="margin: 2rem 0;" class="btn primary btn-block">Example of PHP code</button>
+    </a>
+</div>
+
+{% if contentTextBottom is not empty %}
+<div id="block_358">
+    <div class="services-list">
+        <div class="bg"></div>
+        <div class="divider-top"></div>
+        <div class="divider-bottom"></div>
+        <div class="container-fluid">
+            <div class="row add-funds__form-alignment px-lg-4">
+                <div class="col-lg-12">
+                    <div class="component_card">
+                        <div class="card">
+
+                            {{ contentTextBottom }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+</div>
+{% include 'footer.twig' %}

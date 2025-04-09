@@ -1,0 +1,212 @@
+{% include 'header.twig' %}
+
+<!-- Main Content -->
+<main class="container">
+	{% if contentText is not empty %}
+		<div class="container-fluid">
+			<div class="component_content_card component_content_button component_content_headers">
+				<div class="card">
+					<div class="new-order__content-title">
+						<div class="position-relative">
+							{{contentText}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	{# {% include 'widgets/neworderTopWidgets.twig' %} #}
+
+	<div class="gap"></div>
+
+	<!-- Call to Action -->
+	<section class="form-wide">
+		{% if error %}
+			<div class="alert alert-dismissible alert-danger">
+				{{ errorText }}
+			</div>
+			<br>
+		{% endif %}
+
+		{% if data["order"]["success"] == 1 %}
+			<div class="alert alert-dismissible alert-success">
+				<strong>
+					{{ lang["neworder.success.id"] }}:
+				</strong>
+				{{ data['order']['id'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.service"] }}:
+				</strong>
+				{{ data['order']['service'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.link"] }}:
+				</strong>
+				{{ data['order']['link'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.quantity"] }}:
+				</strong>
+				{{ data['order']['quantity'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.charge"] }}:
+				</strong>
+
+				{{convert_currency(data['order']['price'])}}
+
+				<br>
+				<strong>
+					{{ lang["neworder.success.balance"] }}:
+				</strong>
+
+
+				{{convert_currency(data['order']['balance'])}}
+				<br>
+			</div>
+		{% endif %}
+		{% if data["order"]["success"] == 2 %}
+			<div class="alert alert-dismissible alert-success">
+				<strong>
+					{{ lang["neworder.success.id"] }}:
+				</strong>
+				{{ data['order']['id'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.service"] }}:
+				</strong>
+				{{ data['order']['service'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.username"] }}:
+				</strong>
+				{{ data['order']['link'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.quantity"] }}:
+				</strong>
+				{{ data['order']['min'] }}
+				-
+				{{ data['order']['max'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.posts"] }}:
+				</strong>
+				{{ data['order']['posts'] }}
+				<br>
+				<strong>
+					{{ lang["neworder.success.delay"] }}:
+				</strong>
+				{{ data['order']['delay'] }}
+				<br>
+			</div>
+			<br>
+		{% endif %}
+
+		<div class="card form form-type2">
+			<h2>New Order</h2>
+			<form action="" method="post" id="order-form">
+				{% if site["modules"]["search_services"] %}
+					<div class="form-group">
+						<div class="search-dropdown" id="new-order-search" style="position: relative;" data-lang-placeholder="Search">
+							<div class="input-wrapper" style="position: relative;">
+								<button type="button" id="searchServicesButtonIcon" class="input-wrapper__prepend">
+									<span class="icon text-black">
+										<i class="fas fa-search"></i>
+									</span>
+								</button>
+								<input type="text" class="form-control" id="searchServicesInputField" placeholder="Search Services...">
+								<button type="button" class="input-wrapper__append" id="searchServicesInputClearButton">
+									<span class="fas fa-times"></span>
+								</button>
+							</div>
+						</div>
+						<div class="select2-dropdown search-results" id="searchServicesResultsDropdown" style="display: none;"></div>
+					</div>
+				{% endif %}
+
+				<div class="input-group">
+					<label for="orderform-category" class="form-label">{{ lang["neworder.category"] }}</label>
+					<select id="neworder_category" class="form-control mt-10" name="OrderForm[category]">
+						{% for category in categories %}
+							<option data-icon="{{category["category_icon"]["icon"]}}" data-icon-type="{{category["category_icon"]["iconType"]}}" value="{{ category["category_id"] }}" {% if category["category_id"] == data['categories'] %} selected {% endif %}>{{ category["category_name"] }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<div class="input-group">
+					<label for="orderform-service" class="form-label">{{ lang["neworder.service"] }}</label>
+					<select
+						id="neworder_services" class="form-control mt-10" name="services">{# <option>No Services Found!</option> #}
+					</select>
+				</div>
+
+				<div id="neworder_fields"></div>
+				<div id="fields"></div>
+
+				<div class="input-group" charge_div>
+					<label for="charge" class="form-label">{{ lang["neworder.charge"] }}</label>
+					<input type="text" class="form-control" id="charge" readonly>
+				</div>
+
+				<input type="hidden" name="crsf_token" value="{{ csrf_token() }}">
+
+				<button id="neworderbutton" type="submit" class="submit-btn">{{ lang["neworder.button"] }}</button>
+			</form>
+		</div>
+
+		{% if annoucements  %}
+			<div class="col-lg-5">
+
+
+				<div class="component_content_card component_content_button component_content_headers">
+					<div style="padding-top: 0px;
+												                                                                                                                                                padding-left: 0px;
+												                                                                                                                                                padding-right: 0px;
+												                                                                                                                                                padding-bottom: 0px;" class="card mb-3">
+						<div class=" headsir">
+							<i class="fal fa-newspaper mr-2"></i>Latest News</div>
+						<div class="ssw">
+							{% for news in annoucements %}
+								<div class="news-item">
+									<div class="news-details">
+										<p class="news-date">
+											<i class="fad fa-calendar-alt mr-1" style="--fa-secondary-opacity: 0.65;"></i>
+											{{ show_date(news['updated_at'])|date("jS M, Y g:i A") }}</p>
+										<h4 id="service_description" class=" news-title" style="border-bottom-left-radius:0px;border-bottom-right-radius:0px;">
+											<span class="icon-container">
+												<img src="{{site['url'] ~ '/public/icons/' ~ news['news_icon'] ~ '.png' }}" alt="{{news['news_icon']}}" widht="30" height="30">
+											</span>
+											{{ news['news_title'] }}
+										</h4>
+										<p id="service_description" class="news-content" style="border-top-left-radius:0px;border-top-right-radius:0px;">{{ news['news_content'] }}</p>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+		{% endif %}
+		{% if contentTextBottom is not empty %}
+			<div class="col-lg-6 mb-2">
+				<div class="component_content_card component_content_button component_content_headers">
+					<div class="card">
+						<div class="new-order__content-title">
+							<div class="position-relative">
+								{{ contentTextBottom }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+	</section>
+	{% include 'footer.twig' %}
+</main>

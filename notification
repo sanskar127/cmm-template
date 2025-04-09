@@ -1,0 +1,43 @@
+{# <div id="notifications-content" class="tab-content">
+																																						                <!-- Notifications Tab Content (can add different content here) -->
+																																						                <section class="form">
+																																						                    <div class="card form-type2">
+																																						                        <form action="#">
+																																						                        <div class="input-group">
+																																						                            <label for="category" class="form-label">Telegram Username</label>
+																																						                            <input class="mt-10" type="text" name="telegramuname">
+																																						                        </div>
+																																						
+																																						                        <button type="submit" class="primary btn-block">Update</button>
+																																						                        </form>
+																																						                    </div>
+																																						                </section>
+																																						
+																																						                <div class="gap"></div>
+																																						
+																																						                <!-- Services Table -->
+																																						                <section class="table-container">
+																																						                    <table>
+																																						                        <thead>
+																																						                            <tr>
+																																						                                <th>Notification</th>
+																																						                                <th>Email</th>
+																																						                            </tr>
+																																						                        </thead>
+																																						                        <tbody>
+																																						                            <tr>
+																																						                                <td>API key changed</td>
+																																						                                <td><input type="checkbox" name="apichange" id="apichange"></td>
+																																						                            </tr>
+																																						                            <tr>
+																																						                                <td>New message</td>
+																																						                                <td><input type="checkbox" name="apichange" id="apichange"></td>
+																																						                            </tr>
+																																						                            <tr>
+																																						                                <td colspan="2"><button class="primary btn-block">Save Changes</button></td>
+																																						                            </tr>
+																																						                        </tbody>
+																																						                    </table>
+																																						                </section>
+																																						            </div> #}
+	
